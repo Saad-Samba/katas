@@ -7,66 +7,33 @@ class RomanNumeralConverterTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider checks
      */
-    function it_converts_1_to_Roman_representation(){
-        $representation = RomanNumeral::convert_up_to_number_3(1);
-        self::assertEquals('I',$representation);
+    function it_converts_to_Roman_representation($arabic,$roman){
+        $representation = RomanNumeral::convert($arabic);
+        self::assertEquals($roman,$representation);
     }
 
-    /**
-     * @test
-     */
-    function it_converts_2_to_Roman_representation(){
-        $representation = RomanNumeral::convert_up_to_number_3(2);
-        self::assertEquals('II',$representation);
-    }
+    static function checks(){
+        return [
+            [1, "I"],
+            [2, "II"],
+            [4, "IV"],
+            [5, "V"],
+            [6, "VI"],
+            [7, "VII"],
+            [8, "VIII"],
+            [9, "IX"],
+            [10, "X"],
+            [11, "XI"],
+            [15, "XV"],
+            [19, "XIX"],
+            [40, "XL"],
+            [50, "L"],
+            [100, "C"],
+            [3999, "MMMCMXCIX"],
 
-    /**
-     * @test
-     */
-    function it_converts_3_to_Roman_representation(){
-        $representation = RomanNumeral::convert_up_to_number_3(3);
-        self::assertEquals('III',$representation);
-    }
-
-    /**
-     * @test
-     */
-    function it_converts_4_to_Roman_representation(){
-        $representation = RomanNumeral::convert_4();
-        self::assertEquals('IV',$representation);
-    }
-
-    /**
-     * @test
-     */
-    function it_converts_5_to_Roman_representation(){
-        $representation = RomanNumeral::convert_5();
-        self::assertEquals('V',$representation);
-    }
-
-    /**
-     * @test
-     */
-    function it_converts_6_to_Roman_representation(){
-        $representation = RomanNumeral::convert_6_to_8(6);
-        self::assertEquals('VI',$representation);
-    }
-
-    /**
-     * @test
-     */
-    function it_converts_7_to_Roman_representation(){
-        $representation = RomanNumeral::convert_6_to_8(7);
-        self::assertEquals('VII',$representation);
-    }
-
-    /**
-     * @test
-     */
-    function it_converts_8_to_Roman_representation(){
-        $representation = RomanNumeral::convert_6_to_8(8);
-        self::assertEquals('VIII',$representation);
+        ];
     }
 
 }

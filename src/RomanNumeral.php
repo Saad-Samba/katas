@@ -4,27 +4,31 @@ namespace App;
 
 class RomanNumeral
 {
-    public static function convert_up_to_number_3($arabic_number){
-        $roman_representation = '';
-        for ($i = 0; $i<$arabic_number; $i++){
-            $roman_representation = $roman_representation."I";
+    const CONVERSION = [
+        'M' => 1000,
+        'CM' => 900,
+        'D' => 500,
+        'CD' => 400,
+        'C' => 100,
+        'XC' => 90,
+        'L' => 50,
+        'XL' => 40,
+        'XX' => 20,
+        'X' => 10,
+        'IX' => 9,
+        'V' => 5,
+        'IV' => 4,
+        'I' => 1
+    ];
+    public static function convert($number){
+        $result = '';
+        foreach (static::CONVERSION as $numeral => $arabic){
+            while ($number >= $arabic){
+                $result .= $numeral;
+                $number -= $arabic;
+            }
         }
-        return $roman_representation;
-    }
 
-    public static function convert_4(){
-        return 'IV';
-    }
-
-    public static function convert_5(){
-        return 'V';
-    }
-
-    public static function convert_6_to_8($arabic_number){
-        $roman_representation = 'V';
-        for ($i = 5; $i<$arabic_number; $i++){
-            $roman_representation = $roman_representation."I";
-        }
-        return $roman_representation;
+        return $result;
     }
 }
